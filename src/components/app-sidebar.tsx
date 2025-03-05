@@ -10,7 +10,6 @@ import {
   GalleryVerticalEnd,
   Map,
   PieChart,
-  Settings2,
   SquareTerminal,
 } from "lucide-react"
 
@@ -52,90 +51,48 @@ const data = {
   ],
   navMain: [
     {
-      title: "Playground",
+      title: "My Playlists",
       url: "#",
       icon: SquareTerminal,
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Technology",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Business",
           url: "#",
         },
         {
-          title: "Settings",
+          title: "Trading",
           url: "#",
         },
+        
       ],
     },
     {
-      title: "Models",
+      title: "Instructor Dashboard",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
+          title: "Instructor Studio",
           url: "#",
         },
         {
-          title: "Explorer",
+          title: "Market Insights",
           url: "#",
         },
-        {
-          title: "Quantum",
-          url: "#",
-        },
+        
       ],
     },
     {
-      title: "Documentation",
+      title: "My Subscriptions",
       url: "#",
       icon: BookOpen,
-      items: [
-        {
-          title: "Introduction",
-          url: "#",
-        },
-        {
-          title: "Get Started",
-          url: "#",
-        },
-        {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
-          url: "#",
-        },
-      ],
     },
-    {
-      title: "Settings",
-      url: "#",
-      icon: Settings2,
-      items: [
-        {
-          title: "General",
-          url: "#",
-        },
-        {
-          title: "Team",
-          url: "#",
-        },
-        {
-          title: "Billing",
-          url: "#",
-        },
-        {
-          title: "Limits",
-          url: "#",
-        },
-      ],
-    },
+  
   ],
   projects: [
     {
