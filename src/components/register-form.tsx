@@ -1,129 +1,120 @@
-"use client";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client"
+import { useState } from 'react';
+import { authService } from '../services/api';
+import { Button } from "@/components/ui/button"
 
-const Register = () => {
+export default function RegisterForm() {
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    phone_number: "",
-    password: "",
+    first_name: '',
+    last_name: '',
+    phone_number: '',
+    email: '',
+    password: '',
   });
-
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
 
-    try {
-      // Simulate API call (replace with actual registration API)
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+    const response = await authService.register(formData);
 
+    if (response.error) {
+      setError(response.error);
       setLoading(false);
-      alert("Registration successful!");
-    } catch (err) {
-      setError("Something went wrong. Try again.");
-      setLoading(false);
+      return;
     }
+
+    if (response.data?.token) {
+      // Store token in localStorage or context
+      localStorage.setItem('authToken', response.data.token);
+      // Redirect user or update application state
+      window.location.href = '/dashboard';
+    }
+
+    setLoading(false);
   };
 
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader>
-          <CardTitle className="text-2xl font-semibold text-center">
-            Create an Account
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          {error && <div className="text-red-500 text-sm mb-3">{error}</div>}
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label>First Name</Label>
-              <Input
+return (
+    <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-white shadow-md rounded-md max-w-md mx-auto">
+        <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium text-gray-700">First Name</label>
+            <input
                 type="text"
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
-                placeholder="Enter your first name"
                 required
-              />
-            </div>
-
-            <div>
-              <Label>Last Name</Label>
-              <Input
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+        
+        <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium text-gray-700">Last Name</label>
+            <input
                 type="text"
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
-                placeholder="Enter your last name"
                 required
-              />
-            </div>
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
 
-            <div>
-              <Label>Email</Label>
-              <Input
+        <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium text-gray-700">Phone Number</label>
+            <input
+                type="text"
+                name="phone_number"
+                value={formData.phone_number}
+                onChange={handleChange}
+                required
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
+
+        <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium text-gray-700">Email</label>
+            <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="Enter your email"
                 required
-              />
-            </div>
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
 
-            <div>
-              <Label>Phone Number</Label>
-              <Input
-                type="tel"
-                name="phone_number"
-                value={formData.phone_number}
-                onChange={handleChange}
-                placeholder="Enter your phone number"
-                required
-              />
-            </div>
-
-            <div>
-              <Label>Password</Label>
-              <Input
+        <div className="flex flex-col">
+            <label className="mb-2 text-sm font-medium text-gray-700">Password</label>
+            <input
                 type="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Enter your password"
                 required
-              />
-            </div>
+                className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+        </div>
 
-            <Button type="submit" disabled={loading} className="w-full">
-              {loading ? "Registering..." : "Register"}
-            </Button>
-          </form>
+        {error && <div className="text-red-500 text-sm">{error}</div>}
 
-          <p className="text-sm text-gray-600 text-center mt-3">
-            Already have an account?{" "}
-            <a href="/login" className="text-blue-500 hover:underline">
-              Login
-            </a>
-          </p>
-        </CardContent>
-      </Card>
-    </div>
-  );
-};
-
-export default Register;
+        <Button
+            type="submit"
+            disabled={loading}
+            className="w-full"
+        >
+            {loading ? 'Registering...' : 'Register'}
+        </Button>
+    </form>
+);
+}
