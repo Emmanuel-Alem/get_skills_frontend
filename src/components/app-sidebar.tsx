@@ -2,15 +2,13 @@
 
 import * as React from "react"
 import {
-  AudioWaveform,
-  BookOpen,
-  Bot,
-  Command,
+  CalendarPlus,
   Frame,
   GalleryVerticalEnd,
+  ListVideo,
   Map,
+  MonitorCog,
   PieChart,
-  SquareTerminal,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -43,7 +41,7 @@ const data = {
     {
       title: "My Playlists",
       url: "#",
-      icon: SquareTerminal,
+      icon: ListVideo,
       isActive: true,
       items: [
         {
@@ -64,7 +62,7 @@ const data = {
     {
       title: "Instructor Dashboard",
       url: "#",
-      icon: Bot,
+      icon: MonitorCog,
       items: [
         {
           title: "Instructor Studio",
@@ -80,7 +78,7 @@ const data = {
     {
       title: "My Subscriptions",
       url: "#",
-      icon: BookOpen,
+      icon: CalendarPlus,
     },
   
   ],
