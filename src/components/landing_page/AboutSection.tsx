@@ -19,7 +19,7 @@ export default function AboutSection() {
 
           {/* Right Side: Text Content */}
           <div className="text-center md:text-left">
-            <h2 className="text-4xl font-bold mb-6">About Us</h2>
+            <h2 className="text-4xl font-bold mb-6 font-londrina">About Us</h2>
             <p className="text-gray-400 mb-6">
               At GetSkills, we are passionate about empowering learners to achieve their goals. Our mission is to provide high-quality, accessible education to everyone, everywhere.
             </p>
