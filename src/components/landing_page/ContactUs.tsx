@@ -78,7 +78,7 @@ export default function ContactUs() {
   return (
     <section id="contact" className="bg-black text-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-8">Contact Us</h2>
+        <h2 className="text-4xl font-bold text-center mb-8 font-londrina">Contact Us</h2>
         <p className="text-gray-400 text-center mb-12">
           Have questions or need assistance? Send us a message, and we will get back to you as soon as possible.
         </p>
