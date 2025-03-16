@@ -29,7 +29,7 @@ export const login = async (credentials: LoginCredentials) => {
  * @returns a promise that resolves to the register res data
  */
 export const register = async(data: RegisterData) => {
-    const response = await api.post('/register', 'data');
+    const response = await api.post('/register', data);
     return response.data;   //expected: {message, user, token}
 }
 

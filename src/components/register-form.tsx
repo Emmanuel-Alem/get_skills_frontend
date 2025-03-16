@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 export default function RegisterForm({
   className,
@@ -16,19 +17,23 @@ export default function RegisterForm({
         </p>
       </div>
       <div className="grid gap-3">
-        <Label htmlFor="name">Name</Label>
-        <Input id="name" placeholder="John Doe" required />
+        <Label htmlFor="first_name">First Name</Label>
+        <Input id="first_name" name="first_name"  type="string" placeholder="John" required />
       </div>{" "}
+      <div className="grid gap-3">
+        <Label htmlFor="first_name">Last Name</Label>
+        <Input id="last_name" name="last_name"  type="string" placeholder="Doe" required />
+      </div>
+      <div className="grid gap-3">
+        <Label htmlFor="email">Email</Label>
+        <Input id="email" name="email" type="email" placeholder="test@example.com" required />
+      </div>
+      <div className="grid gap-3">
+        <Label htmlFor="phone_number">Phone Number</Label>
+        <Input id="phone_number" name="phone_number" type="string" placeholder="+2519123456" required />
+      </div>
       <div className="grid gap-6">
-        <div className="grid gap-3">
-          <Label htmlFor="email">Email</Label>
-          <Input
-            id="email"
-            type="email"
-            placeholder="email@example.com"
-            required
-          />
-        </div>
+        
         <div className="grid gap-3">
           <div className="flex items-center">
             <Label htmlFor="password">Password</Label>
@@ -55,9 +60,9 @@ export default function RegisterForm({
       </div>
       <div className="text-center text-sm">
         Already have an account?{" "}
-        <a href="/auth/login" className="underline underline-offset-4">
+        <Link href="/auth/login" className="underline underline-offset-4">
           Login
-        </a>
+        </Link>
       </div>
     </form>
   );

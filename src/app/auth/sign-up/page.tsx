@@ -14,6 +14,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // prevents default GET submission [do not touch]
     const formData = new FormData(e.currentTarget);
     const first_name = formData.get('first_name') as string;
     const last_name = formData.get('last_name') as string;
