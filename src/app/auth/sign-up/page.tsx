@@ -1,9 +1,35 @@
-import { GalleryVerticalEnd } from "lucide-react"
+'use client';
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import RegisterForm from "@/components/register-form";
 import Link from "next/link";
 
-import RegisterForm from "@/components/register-form"
+import { GalleryVerticalEnd } from "lucide-react"
+
 
 export default function LoginPage() {
+
+  const  { register } = useAuth();
+  const router = useRouter();
+
+  const handleRegister = async (e: FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    const first_name = formData.get('first_name') as string;
+    const last_name = formData.get('last_name') as string;
+    const phone_number = formData.get('phone_number') as string;
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      await register({ first_name, last_name, phone_number, email, password });
+      router.push('/auth/login'); 
+    } catch (error) {
+      console.error('Registration failed', error);
+    }
+  }
+
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -17,7 +43,7 @@ export default function LoginPage() {
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <RegisterForm />
+            <RegisterForm onSubmit={handleRegister}/>
           </div>
         </div>
       </div>
