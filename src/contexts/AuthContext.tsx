@@ -1,4 +1,4 @@
-// /contexts/AuthContext.tsx
+'use client';
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { login as loginService, logout as logoutService, fetchUser } from '../services/authService';
 
