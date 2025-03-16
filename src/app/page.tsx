@@ -8,6 +8,7 @@ import OurTeamSection from "@/components/landing_page/OurTeamSection";
 import Footer from "@/components/landing_page/Footer";
 import ContactUs from "@/components/landing_page/ContactUs";
 import { AuthProvider } from "@/context/AuthContext";
+import Link from "next/link";
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // State to manage menu visibility
@@ -120,12 +121,11 @@ export default function Home() {
               various fields.
             </p>
             <div className="mt-6">
-              <button className="bg-blue-600 px-6 py-3 rounded text-lg mr-4">
-                Get Started →
-              </button>
-              <button className="bg-gray-700 px-6 py-3 rounded text-lg">
-                How it Works
-              </button>
+              <Link href="/auth/login">
+                <button className="bg-blue-600 px-6 py-3 rounded text-lg mr-4 cursor-pointer">
+                  Get Started →
+                </button>
+              </Link>
             </div>
           </div>
 
