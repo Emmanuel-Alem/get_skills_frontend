@@ -1,22 +1,46 @@
-import { GalleryVerticalEnd } from "lucide-react"
+'use client';
 
+import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
 import { LoginForm } from "@/components/login-form"
 
+import { GalleryVerticalEnd } from "lucide-react";
+
+
 export default function LoginPage() {
+  const { login } = useAuth();
+  const router = useRouter();
+
+  // handle login form submission
+  const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    try {
+      await login(email, password);
+      router.push('/dashboard');
+    } catch(error) {
+      console.error('Login failed', error);
+    }
+  }
+
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
         <div className="flex justify-center gap-2 md:justify-start">
-          <a href="#" className="flex items-center gap-2 font-medium">
+          <a href="/" className="flex items-center gap-2 font-medium">
             <div className="bg-primary text-primary-foreground flex size-6 items-center justify-center rounded-md">
               <GalleryVerticalEnd className="size-4" />
             </div>
-            Acme Inc.
+            GetSkills
           </a>
         </div>
         <div className="flex flex-1 items-center justify-center">
           <div className="w-full max-w-xs">
-            <LoginForm />
+            <LoginForm  onSubmit={handleLogin}/>
           </div>
         </div>
       </div>
